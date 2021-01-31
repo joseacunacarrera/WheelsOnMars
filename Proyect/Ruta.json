@@ -1,0 +1,24 @@
+Tramo :[ 
+
+{"KmStart" : 0,
+"KmEnd" : 9,
+"Firmeza" : 24,
+"Humedad" : 78,
+"Agarre" : 58
+}{"KmStart" : 9,
+"KmEnd" : 32,
+"Firmeza" : 64,
+"Humedad" : 5,
+"Agarre" : 45
+}{"KmStart" : 32,
+"KmEnd" : 33,
+"Firmeza" : 27,
+"Humedad" : 61,
+"Agarre" : 91
+}{"KmStart" : 33,
+"KmEnd" : 39,
+"Firmeza" : 42,
+"Humedad" : 27,
+"Agarre" : 36
+}
+]
