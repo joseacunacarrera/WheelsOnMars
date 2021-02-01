@@ -30,7 +30,7 @@ int main()
 
     Genetic genetic(20, &torqueTable, &foldingTable, &foldingEnergyTable, &torqueEnergyTable, tramo); 
 
-    genetic.getBestCombination();
+    std::cout << genetic.getBestCombination()->getEnergy() << std::endl;
 
     return 0;
 }
