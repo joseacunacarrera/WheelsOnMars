@@ -1,19 +1,19 @@
 #include "../Headers/Vehiculo.h"
-#include "../Headers/Tire.h"
-#include <vector>
+
 
 //constructors
 Vehiculo::Vehiculo(){
 	this->bateria = 7000;				// maximo de bateria
-	this->Tires = Tire();
+	this->wheels = Wheels();
 	this->distanciaRecorrida = 0;
 	//this->ubicacionActual = 1837294.25;
 	this->destino = 0;
+	this->Km = 2587;
 }
 
-Vehiculo::Vehiculo(int pBateria, Tire pTires, int distancia){
+Vehiculo::Vehiculo(int pBateria, Wheels pWheels, int distancia){
 	this->bateria = pBateria;				
-	this->Tires = pTires;
+	this->wheels = pWheels;
 	this->distanciaRecorrida = distancia;
 	this->destino = 0;
 	//this->ubicacionActual = 1837294.25;
@@ -37,12 +37,15 @@ std::vector<Ground> Vehiculo::detectarTerreno(){
 	while(alcance<=40 and alcance>1) {
 		//cout<<"alcance"<<alcance<<"\n";
 		Ground tramo =  Ground(alcance);
-		
 		//cout<<"tramo.getDistance"<<tramo.getDistance()<<"\n";
 		alcance = alcance - tramo.getDistance();
-
 		//cout<<"alcance"<<alcance<<"\n";
 		array.push_back(tramo);
+		this->distanciaRecorrida += tramo.getDistance();
+		if(this->distanciaRecorrida > this->Km){
+			this->destino=1;
+			break;
+		}
 	}
 
 	return (array);
@@ -52,9 +55,9 @@ std::vector<Ground> Vehiculo::detectarTerreno(){
 //Cosumo de Energia realizado en una distancia de Tramo tras seleccion de llanatas
 void Vehiculo::consumoEnergia(int distanciaTramo){
 	// pliegue y torque no tiene que se binario
-	int energia = this->Tires.getFold() + this->Tires.getTorque();
+	int energia = this->wheels.getFold() + this->wheels.getTorque();
 	int bateria = (this->bateria / energia);
-	int consumo = (bateria - distanciaRecorrida);
+	int consumo = (bateria - distanciaTramo);
 
 	this->bateria = (consumo * energia);
 }

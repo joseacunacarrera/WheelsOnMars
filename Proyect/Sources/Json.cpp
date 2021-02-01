@@ -9,34 +9,51 @@ string addPair(string Variable, string Value){
 //constructors
 Json::Json(){
 
-	this->distancia = 0;
+	this->count = 0;
 	ofstream file;
 	file.open("Ruta.json");
 
-	this->json = "{"+	addPair("Origen","552532.54") + ",\n" + addPair("Destino", "12321.52")+ ",\n" + addPair("Distancia",2587)+"\n}";
+	this->json = "{"+	addPair("Origen","552532.54") + ",\n" + addPair("Destino", "12321.52")+ ",\n" + addPair("Distancia",2587)+"\n";
 	file<<json;
 	file.close();
 }
 
-void Json::addGround(Ground Temp){
+void Json::addGround(Ground Temp, int num){
 
-	this->TempGround += "{" + addPair("KmStart", this->distancia)+ ",\n" + addPair("KmEnd", this->distancia+Temp.getDistance())+ ",\n" +addPair("Firmeza",Temp.getFirmness())+ ",\n" +addPair("Humedad",Temp.getHumidity()) + ",\n" + addPair("Agarre",Temp.getGrip())+ "\n}" ;
-	this->distancia += Temp.getDistance();
+	this->TempGround += "{" + addPair("KmStart", this->count)+ ",\n" + addPair("KmEnd", this->count+Temp.getDistance())+ ",\n" +addPair("Firmeza",Temp.getFirmness())+ ",\n" +addPair("Humedad",Temp.getHumidity()) + ",\n" + addPair("Agarre",Temp.getGrip())+ "\n}" ;
+	this->count += Temp.getDistance();
+	if(num>0){
+		this->TempGround += ",";
+	}
 }
 
-void Json::addTramo(vector<Ground> Tramo){
+void Json::addSection(vector<Ground> Sections, int run){
 	this->TempGround = "\n";
-	for (int NumGround = 0; NumGround <= Tramo.size()-1; NumGround++){
-  			addGround(Tramo[NumGround]);
+	for (int NumGround = 0; NumGround <= Sections.size()-1; NumGround++){
+  			addGround(Sections[NumGround],Sections.size()-1-NumGround);
   		}
   	ofstream file;
-  	file.open("Ruta.json");
-  	this->Tramo = "Tramo :[ \n" + this->TempGround + "\n]";
-	file<<this->Tramo;
+  	file.open("Ruta.json", std::ios_base::app);
+  	this->section = ",\"Tramo"+  to_string(run) + "\""+"  :[ " + this->TempGround + "]";
+	file << this->section << endl;
+
+
 	file.close();
-	
+
 	/*
-	this->Tramo = "Tramo :[ \n" + this->TempGround + "\n]";
-  	this->json += this->Tramo;
+	this->section = "Tramo :[ \n" + this->TempGround + "\n]";
+  	this->json += this->section;
+  	*/
+}
+void Json::close(){
+
+  	ofstream file;
+  	file.open("Ruta.json", std::ios_base::app);
+	file <<"}";
+	file.close();
+
+	/*
+	this->section = "Tramo :[ \n" + this->TempGround + "\n]";
+  	this->json += this->section;
   	*/
 }

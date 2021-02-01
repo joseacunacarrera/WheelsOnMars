@@ -1,5 +1,5 @@
 #include "iostream"
-#include "../Headers/Tire.h"
+#include "../Headers/Wheels.h"
 #include "Ground.h"
 #include <vector>
 
@@ -13,9 +13,10 @@ class Vehiculo{
 private:
 
 	float bateria;
-	Tire Tires;
+	Wheels wheels;
 	int distanciaRecorrida;		// distancia total de
 	int destino;
+	int Km;
 	//float ubicacionActual;	meter ubicacionActual a la ruta
 	
 
@@ -23,7 +24,7 @@ public:
 
 	//constructors
 	Vehiculo();
-	Vehiculo(int pBateria, Tire pTires, int distancia);
+	Vehiculo(int pBateria, Wheels pWheelss, int distancia);
 
 
 	//setters & getters		
