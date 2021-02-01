@@ -18,12 +18,11 @@ void Vehiculo::detectarTerreno(){
 	Tierra tramo = new Tierra();
 	int distancia = 40-tramo.getDistancia();
 	
-	// meter json
-
+	// meter json (consumidor)
 	while(distancia>0) {
 		tramo = new Tierra(distancia);
 		distancia = distancia - tramo.getDistancia();
-	
+		
 		//meter en el json
 	
 	}

@@ -4,14 +4,14 @@
 Tierra::Tierra(){
 	this->distancia = rand() % 41;
 	this->firmeza =  rand() % 100 ;
-	this->humedad =  rand() % 100;;
+	this->humedad =  rand() % 100;
 	this->agarre =  rand() % 100;
 }
 
 Tierra::Tierra(int pDistancia){
 	this->distancia = rand() % pDistancia;
-	this->firmeza =  rand() % 100 ;
-	this->humedad =  rand() % 100;;
+	this->firmeza =  rand() % 100;
+	this->humedad =  rand() % 100;
 	this->agarre =  rand() % 100;
 }
 
